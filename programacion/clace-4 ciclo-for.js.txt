@@ -1,0 +1,5 @@
+for (var i = 3;
+i <= 30;
+i=i+1.5) {
+  console.log(i);
+}

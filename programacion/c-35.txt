@@ -1,0 +1,2 @@
+.ref = referencia 
+.on = escucha los cambiaos en base de datos

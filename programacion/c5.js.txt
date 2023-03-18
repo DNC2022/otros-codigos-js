@@ -1,0 +1,62 @@
+//Crear el potenciador azul (arriba a la izquierda)
+var blue_power = createSprite(100,100);
+blue_power.setAnimation("powerupBlue_1");
+
+//Crear el potenciador rojo (arriba a la derecha)
+var red_power = createSprite(100,100);
+
+
+//Crear el potenciador verde (abajo a la izquierda)
+var green_power = createSprite(100,100);
+
+
+//Crear el potenciador amarillo (abajo a la derecha)
+var yellow_power = createSprite(100,100);
+
+
+//Crear el sprite de la moneda
+var coin = createSprite(200,200);
+coin.setAnimation("coin_gold_1");
+coin.scale = 0.5;
+
+//asignar velocityX y velocityY para mover el sprite de moneda.
+coin.velocityX = 6;
+coin.velocityY = 8;
+
+createEdgeSprites();
+
+function draw() {
+  background("white");
+  
+  
+  //reproducir sonido si la moneda golpea el 'potenciador azul'
+  if(coin.bounceOff(blue_power)) {
+    
+    playSound("sound://category_achievements/retro_game_classic_power_up_2.mp3");
+    //incrementar la escala del potenciador azul en 0.1
+    blue_power.scale = blue_power.scale + 0.1;
+  }
+  
+  //reproducir sonido si la moneda rebota en el 'potenciador verde'
+  
+  
+  
+  
+  //reproducir sonido si la moneda rebota en el 'potenciador rojo'
+  
+  
+
+  
+  //reproducir sonido si la moneda rebota en el 'potenciador amarillo'
+  
+  
+
+
+  //Ccambiar esta instrucción para reproducir el sonido en el momento que la moneda rebote en los bordes
+  coin.bounceOff(edges);
+  
+  //dibujar todos los sprites
+  drawSprites();
+}
+
+

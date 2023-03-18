@@ -1,0 +1,17 @@
+function setup() {
+  
+}
+
+function draw() {
+  background("white");
+  fill("silver");
+  rect(50,mouseY,10,30);
+  fill("blue");
+  rect(250,mouseY,10,30);
+  fill("green");
+  rect(10,mouseY,10,30);
+  fill("yellow");
+  rect(300,mouseY,10,30);
+  
+  
+}

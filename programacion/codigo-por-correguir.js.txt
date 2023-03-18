@@ -1,0 +1,103 @@
+//crear el sprite de la pelota
+var ball = createSprite(200,200,10,10);
+ball.setAnimation("soccer_yellow_1");
+var reset;
+//crear el sprite de la Paleta del Jugador en el borde derecho
+var playerPaddle = createSprite(390,200,10,100);
+playerPaddle.shapeColor = "red";
+
+//crear el sprite de la Paleta de la Computadora en el borde izquierdo
+var computer_paddle = createSprite(10,100,10,100);
+computer_paddle.shapeColor = "black";
+computer_paddle.mouseY;
+
+//variable para almacenar diferentes estados del juego
+var gameState = "serve";
+
+//variables para llevar la puntuación
+var compScore = 0;
+var playerScore = 0;
+
+//crear límites de borde
+createEdgeSprites();
+  
+function draw() {
+  //limpiar la pantalla
+  background("white");
+  textSize(20);
+  
+  //colocar el texto en el centro
+  if (gameState == "serve") {
+    text("Clic con el Mouse para sacar",120,180);
+  }
+  //mostrar la puntuación
+  text(compScore, 170,20);
+  text(playerScore, 230,20);
+  
+  //hacer que la paleta del jugador se mueva con la posición y del mouse
+  playerPaddle.y = World.mouseY;
+  
+  //IA para la paleta de la computadora
+  //hacer que se mueva con la posición y de la pelota
+  //function gameplay(){
+  //computer_paddle.x = World.mouseX;
+  
+  //if(computer_paddle.x < 60)
+  //{
+    //computer_paddle.x = 60;
+  //}
+    
+  //if(computer_paddle.x > 340)
+  //{
+    //computer_paddle.x = 340;
+  //}
+  //}
+  
+  //hacer que la pelota rebota con los bordes superior e inferior
+  ball.bounceOff(topEdge);
+  ball.bounceOff(bottomEdge);
+  
+  //rebotar la pelota desde la paleta del jugador
+  ball.bounceOff(playerPaddle);
+  
+  //rebotar la pelota desde la paleta de la computadora
+  ball.bounceOff(computer_paddle);
+ 
+  //reiniciar la pelota al centro si cruza la pantalla
+  if(ball.x > 400 || ball.x <0) {
+    
+    //if(ball.x > 400) {
+      //compScore = compScore + 1; 
+    }
+    
+    if(ball.x < 0) {
+      playerScore = playerScore + 1; //incrementar la puntuación del jugador
+    }
+    
+    reset();
+    gameState = "serve";
+  }
+  
+  if (playerScore == 5 || compScore == 5){
+    gameState = "over";
+    text("¡Fin del Juego!",160,160);
+  }
+  
+  drawSprites();
+  //incrementar la velocidad de la pelota en cada pasada
+  ball.velocityX = ball.velocityX *1.01;
+  ball.velocityY = ball.velocityY *1.01;
+//}
+
+function mousePressed() {
+  ball.velocityX = 3;
+  ball.velocityY = 4;
+  gameState ="play";
+}
+
+function reset() {
+  ball.x = 200;
+  ball.y = 200;
+  ball.velocityX = 0;
+  ball.velocityY = 0;
+}

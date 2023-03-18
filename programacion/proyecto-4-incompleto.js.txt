@@ -1,0 +1,35 @@
+//crear un sprite de ovni
+var sprite = createSprite(80, 350);
+sprite.setAnimation("ufo_1");
+sprite.scale = 0.2;
+sprite.velocityY = -4;
+
+var group = createGroup();
+
+createEdgeSprites();
+
+function draw() {
+  //establecer el fondo a blanco
+  background("black");
+  
+  //dibujar los sprites en el canvas
+  drawSprites();
+}
+
+sprite.bounceOff(edges);
+
+for(var i=1; i<=4; i++)
+{
+  var sprite = createSprite(80*i, 350);
+  sprite.setAnimation("ufo_1");
+  sprite.scale = 0.2;
+  sprite.velocityY = -4;
+  group.add(sprite);
+}
+
+function mousePressed() {
+  for(var j=1; j<=50; j=j+1 ){
+    var star = createSprite(randomNumber(0, 400),randomNumber(0,200));
+    star.setAnimation("star2_1");
+  }
+}

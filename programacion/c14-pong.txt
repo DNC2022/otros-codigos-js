@@ -1,0 +1,86 @@
+var ball;
+var score = 0;
+ball = createSprite(200,200,10,10);
+ball.setAnimation("golfball_1");
+ball.scale = 0.05;
+
+var ball2;
+
+ball2 = createSprite(180,200,10,10);
+ball2.setAnimation("golfball_1");
+ball2.scale = 0.05;
+
+var paddle = createSprite(200, 350, 120, 10);
+paddle.shapeColor = color(0,0,255);
+
+createEdgeSprites();
+
+var bricks = createGroup();
+
+function createBrickRow(y, color) {
+  for(c=0; c<6; c++)
+  {
+    var brick = createSprite(65+54*c,y,50, 25);
+    brick.shapeColor = color;
+    bricks.add(brick);
+  }
+}
+
+createBrickRow(65, "blue");
+
+createBrickRow(65+29+29, "green");
+
+
+function draw() {
+  background("purple");
+  
+  textSize(20);
+  text("Puntuación: "+score,40,25);
+  
+  paddle.x = World.mouseX;
+  
+  if(paddle.x < 60)
+  {
+    paddle.x = 60;
+  }
+    
+  if(paddle.x > 340)
+  {
+    paddle.x = 340;
+  }
+  drawSprites();
+  //rotación = rotation + 5;
+  ball.bounceOff(topEdge);
+  ball.bounceOff(leftEdge);
+  ball.bounceOff(rightEdge);
+  
+  ball2.bounceOff(topEdge);
+  ball2.bounceOff(leftEdge);
+  ball2.bounceOff(rightEdge);
+  //ball.bounceOff(paddle);
+  ball.bounceOff(bricks, brickHit);
+  ball.bounceOff(ball2);
+  
+  ball2.bounceOff(bricks, brickHit);
+  ball2.bounceOff(paddle);
+  ball2.bounceOff(ball);
+  if(ball.bounceOff(paddle))
+  {
+    playSound("sound://category_tap/puzzle_game_organic_wood_block_tone_tap_1.mp3");
+  }
+}
+
+function mousePressed()
+{
+  ball.velocityX = 6;
+  ball.velocityY = 4;
+  
+  ball2.velocityY = 6
+  ball2.velocityX = 4
+}
+
+function brickHit(ball, brick) {
+ brick.remove();
+ score = score + 5;
+  
+}

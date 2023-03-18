@@ -1,0 +1,8 @@
+var numbers = ['2','12', '4', '15', '7','14','20','30'];
+console.log(numbers);
+
+numbers.pop();
+numbers.pop();
+numbers.pop();
+numbers.pop();
+console.log(numbers);

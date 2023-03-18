@@ -1,0 +1,4 @@
+angleMode(DEGREES)
+matter.js Matter.Body.setStatic(this.body,false
+Matter.min.js setVelocity()
+libreria p5 vector.fromAngle()

@@ -1,0 +1,5 @@
+var marvel = ['Capitán América', 'Iron Man', 'Hulk', 'Batman', 'Superman'];
+ 
+ console.log(marvel[0])
+ console.log(marvel[1])
+ console.log(marvel[2])

@@ -1,0 +1,7 @@
+En POO tenemos diferentes términos que son muy importantes comprender. Estas son clases y objetos.
+
+Una clase contiene información sobre una categoría. Una class puede entenderse como un plano. Por ejemplo, antes de crear un automóvil,
+ los ingenieros crean un plano del automóvily luego crean varios automóviles, que se pueden modificar en función de los diferentes usuarios
+ de ese plano.
+
+Los atributos de un perro son la altura, la longitud, el color de la piel, y las funcionalidades son correr, ladrar, aullar.

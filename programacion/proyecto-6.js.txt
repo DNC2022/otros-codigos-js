@@ -1,0 +1,94 @@
+//crear la cancha de juego
+var playground = createSprite(200,200);
+playground.setAnimation("sports_basketballhalf2_1");
+
+var top_wall1 = createSprite(75,5,150,10);
+top_wall1.shapeColor = "red";
+
+var top_wall2 = createSprite(325,5,150,10);
+top_wall2.shapeColor = "red";
+
+var ball = createSprite(200, 370);
+ball.setAnimation("basketball_1");
+ball.scale = 0.08;
+
+
+//crear la paleta del jugador en la parte inferior de la pantalla de ancho 100 y alto 10
+var  player_paddle = createSprite(200, 395, 100, 10);
+ player_paddle.shapeColor = "black";
+
+
+
+//definir la variable gameState y establecerla en 'serve'
+var gameState = "serve";
+
+//crear los bordes
+createEdgeSprites();
+
+function draw() {
+  background("white");
+  
+  drawSprites();
+  textSize(20);
+ 
+ //verificar si el estado del juego está en 'serve' y mostrar el texto para servir
+  if (gameState == "serve") {
+    text("Clic con el Mouse para Sacar",110,180);
+  }
+  
+  //verificar si el estado del juego está en 'over' y mostrar el texto 'Fin del Juego'
+if (gameState == "over") {
+    text("Fin del Juego",10,180);
+  }
+  
+
+  //rebotar la pelota desde la pared superior
+  ball.bounceOff(top_wall1);
+  ball.bounceOff(top_wall2);
+  
+  //rebotar la pelota desde los bordes izquierdo y derecho
+  ball.bounceOff(leftEdge);
+  ball.bounceOff(rightEdge);
+  //rebotar la pelota desde player_paddle.
+  ball.bounceOff(player_paddle);
+  
+  //mover la paleta del jugador con la posición x del mouse
+  player_paddle.x=World.mouseX;
+  
+  
+  //verificar si la pelota toca el borde superior
+  if(ball.isTouching(topEdge)) {
+    //llamar a la función 'reset' para reiniciar la pelota
+    reset()
+    //cambiar el estado del juego a 'serve'
+    gameState = "serve";
+  }
+  
+  //escribir la condición if para verificar si la pelota toca el borde inferior 
+  //cambiar el estado del juego a 'over' dentro de la 'condición if'
+  if (ball.isTouching(bottomEdge)) {
+      gameState = "over"
+    }
+      
+  
+  
+}
+
+function mousePressed() {
+  //sacar la pelota
+  ball.velocityX = 4;
+  ball.velocityY = -3;
+  
+  //ccambiar el estado del juego a 'play'
+  gameState = "play";
+}
+
+function reset() {
+  //parar la pelota
+  ball.velocityX = 0;
+  ball.velocityY = 0;
+  
+  //reiniciar la pelota a la posición inicial
+  ball.x = 200;
+  ball.y = 370;
+}
